@@ -27,6 +27,10 @@ git pull origin main # ターミナルで打つこと
 
 ```bash
 git checkout -b feature/[画面または機能名を英語で]
+# 例： git checkout -b feature/login
+# 例： git checkout -b feature/logout
+# 例： git checkout -b feature/add-point-counter
+# 例： git checkout -b feature/make-map-view
 ```
 
 これによって、作業前の準備は終了です。
