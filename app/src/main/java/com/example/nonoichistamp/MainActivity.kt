@@ -12,16 +12,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // 🔹 SharedPreferencesの読み込み（保存データを初期化）
+        PointManager.init(this)
+
         val btnAddSteps = findViewById<Button>(R.id.btnAddSteps)
         val btnAddStamp = findViewById<Button>(R.id.btnAddStamp)
         val btnShowPoints = findViewById<Button>(R.id.btnShowPoints)
 
         btnAddSteps.setOnClickListener {
-            PointManager.addSteps(10_000) // 仮に1万歩追加
+            PointManager.addSteps(10_000)
         }
 
         btnAddStamp.setOnClickListener {
-            PointManager.addStamp() // スタンプ追加
+            PointManager.addStamp()
         }
 
         btnShowPoints.setOnClickListener {

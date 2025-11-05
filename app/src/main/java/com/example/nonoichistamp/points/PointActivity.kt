@@ -14,13 +14,24 @@ class PointActivity : AppCompatActivity() {
         val txtPoints = findViewById<TextView>(R.id.txtPoints)
         val txtSteps = findViewById<TextView>(R.id.txtSteps)
         val txtStamps = findViewById<TextView>(R.id.txtStamps)
+        val txtAchievement = findViewById<TextView>(R.id.txtAchievement)
 
         txtPoints.text = "現在のポイント：${PointManager.getPoints()}"
         txtSteps.text = "歩数：${PointManager.getSteps()}"
         txtStamps.text = "スタンプ取得回数：${PointManager.getStamps()}"
+        txtAchievement.text = "称号：${getAchievementTitle(PointManager.getPoints())}"
+    }
+
+    private fun getAchievementTitle(points: Int): String {
+        return when {
+            points >= 1000 -> "ゴールドランナー"
+            points >= 500 -> "シルバーウォーカー"
+            points >= 100 -> "ブロンズチャレンジャー"
+            else -> "まだなし"
+        }
     }
 
     fun buttonOnClick(view: View) {
-        finish() // 前の画面に戻る
+        finish()
     }
 }
