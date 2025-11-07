@@ -11,6 +11,9 @@ class PointActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_point)
 
+        // 保存値を読み込む
+        PointManager.loadPoints(this)
+
         val txtPoints = findViewById<TextView>(R.id.txtPoints)
         val txtSteps = findViewById<TextView>(R.id.txtSteps)
         val txtStamps = findViewById<TextView>(R.id.txtStamps)

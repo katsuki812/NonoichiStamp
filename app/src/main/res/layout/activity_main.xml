@@ -22,4 +22,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ポイント画面を開く" />
+
+    <Button
+        android:id="@+id/btnUseReward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="景品交換（50ポイント使用）" />
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ポイントリセット" />
 </LinearLayout>
