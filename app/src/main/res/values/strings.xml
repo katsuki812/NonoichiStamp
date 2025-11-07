@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">NonoichiStamp</string>
+
+    <!-- MainActivity のボタン -->
+    <string name="add_steps">歩数追加</string>
+    <string name="add_stamp">スタンプ追加</string>
+    <string name="show_points">ポイント画面を開く</string>
+    <string name="use_reward">景品交換</string>
+    <string name="reset_points">リセット</string>
+
+    <!-- PointActivity の TextView -->
+    <string name="current_points">現在のポイント：0</string>
+    <string name="steps">歩数：0</string>
+    <string name="stamps_count">スタンプ取得回数：0</string>
+    <string name="back">戻る</string>
+
+    <!-- Toast メッセージ -->
+    <string name="added_steps">歩数を追加しました</string>
+    <string name="added_stamp">スタンプを追加しました</string>
+    <string name="used_points">50ポイントを使用しました</string>
+    <string name="not_enough_points">ポイントが足りません</string>
+    <string name="reset_done">ポイントをリセットしました</string>
 </resources>

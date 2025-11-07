@@ -9,29 +9,29 @@
         android:id="@+id/btnAddSteps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="歩数追加" />
+        android:text="@string/add_steps" />
 
     <Button
         android:id="@+id/btnAddStamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="スタンプ追加" />
+        android:text="@string/add_stamp" />
 
     <Button
         android:id="@+id/btnShowPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ポイント画面を開く" />
+        android:text="@string/show_points" />
 
     <Button
         android:id="@+id/btnUseReward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="景品交換（50ポイント使用）" />
+        android:text="@string/use_reward" />
 
     <Button
         android:id="@+id/btnReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ポイントリセット" />
+        android:text="@string/reset_points" />
 </LinearLayout>
