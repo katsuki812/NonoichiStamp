@@ -2,7 +2,9 @@ package com.example.nonoichistamp.points
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nonoichistamp.R
 
@@ -14,27 +16,38 @@ class PointActivity : AppCompatActivity() {
         val txtPoints = findViewById<TextView>(R.id.txtPoints)
         val txtSteps = findViewById<TextView>(R.id.txtSteps)
         val txtStamps = findViewById<TextView>(R.id.txtStamps)
-        val txtAchievement = findViewById<TextView>(R.id.txtAchievement)
         val txtLog = findViewById<TextView>(R.id.txtLog)
+
+        val btnUseReward = findViewById<Button>(R.id.btnUseReward)
+        val btnReset = findViewById<Button>(R.id.btnReset)
 
         txtPoints.text = "現在のポイント：${PointManager.getPoints()}"
         txtSteps.text = "歩数：${PointManager.getSteps()}"
         txtStamps.text = "スタンプ取得回数：${PointManager.getStamps()}"
-        txtAchievement.text = "称号：${getAchievementTitle(PointManager.getPoints())}"
 
+        // 履歴をセット
         val logText = StringBuilder()
         for (log in PointManager.getLogs()) {
-            logText.append("${log.date} : ${log.reason} +${log.points}pt\n")
+            logText.append("${log.date} : ${log.reason} ${log.points}pt\n")
         }
         txtLog.text = logText.toString()
-    }
 
-    private fun getAchievementTitle(points: Int): String {
-        return when {
-            points >= 1000 -> "ゴールドランナー"
-            points >= 500 -> "シルバーウォーカー"
-            points >= 100 -> "ブロンズチャレンジャー"
-            else -> "まだなし"
+        // 景品交換ボタン
+        btnUseReward.setOnClickListener {
+            if (PointManager.getPoints() < 100) {
+                Toast.makeText(this, "ポイントが足りません（100pt必要）", Toast.LENGTH_SHORT).show()
+            } else {
+                PointManager.usePoints(100)
+                Toast.makeText(this, "景品を交換しました！", Toast.LENGTH_SHORT).show()
+                recreate()
+            }
+        }
+
+        // リセットボタン
+        btnReset.setOnClickListener {
+            PointManager.reset()
+            Toast.makeText(this, "データをリセットしました", Toast.LENGTH_SHORT).show()
+            recreate()
         }
     }
 

@@ -24,13 +24,19 @@ object PointManager {
         stamps = prefs.getInt("stamps", 0)
         points = prefs.getInt("points", 0)
 
-        // 履歴を読み込む
-        val logsJson = prefs.getString("logs", "[]")
+        // 履歴読み込み
         logs.clear()
+        val logsJson = prefs.getString("logs", "[]") ?: "[]"
         val jsonArray = JSONArray(logsJson)
         for (i in 0 until jsonArray.length()) {
             val obj = jsonArray.getJSONObject(i)
-            logs.add(PointLog(obj.getString("date"), obj.getString("reason"), obj.getInt("points")))
+            logs.add(
+                PointLog(
+                    obj.getString("date"),
+                    obj.getString("reason"),
+                    obj.getInt("points")
+                )
+            )
         }
     }
 
@@ -50,6 +56,22 @@ object PointManager {
         save()
     }
 
+    fun usePoints(value: Int) {
+        if (points >= value) {
+            points -= value
+            addLog("景品交換", -value)
+            save()
+        }
+    }
+
+    fun reset() {
+        steps = 0
+        stamps = 0
+        points = 0
+        logs.clear()
+        save()
+    }
+
     private fun addLog(reason: String, point: Int) {
         val date = dateFormat.format(Date())
         logs.add(PointLog(date, reason, point))
@@ -61,7 +83,6 @@ object PointManager {
             putInt("stamps", stamps)
             putInt("points", points)
 
-            // 履歴をJSONにして保存
             val jsonArray = JSONArray()
             for (log in logs) {
                 val obj = JSONObject()
@@ -70,6 +91,7 @@ object PointManager {
                 obj.put("points", log.points)
                 jsonArray.put(obj)
             }
+
             putString("logs", jsonArray.toString())
             apply()
         }
