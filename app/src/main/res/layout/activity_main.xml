@@ -7,31 +7,22 @@
 
     <Button
         android:id="@+id/btnAddSteps"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/add_steps" />
+        android:text="歩数追加（1万歩）" />
 
     <Button
         android:id="@+id/btnAddStamp"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/add_stamp" />
+        android:text="スタンプ取得"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnShowPoints"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/show_points" />
+        android:text="ポイント確認"
+        android:layout_marginTop="16dp" />
 
-    <Button
-        android:id="@+id/btnUseReward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/use_reward" />
-
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/reset_points" />
 </LinearLayout>
