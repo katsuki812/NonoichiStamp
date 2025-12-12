@@ -1,39 +1,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:padding="24dp">
 
     <TextView
         android:id="@+id/txtPoints"
-        android:text="@string/current_points"
+        android:text="現在のポイント：0"
         android:textSize="20sp"
+        android:layout_marginBottom="16dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/txtSteps"
-        android:text="@string/steps"
+        android:text="歩数：0"
         android:textSize="18sp"
+        android:layout_marginBottom="16dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/txtStamps"
-        android:text="@string/stamps_count"
+        android:text="スタンプ取得回数：0"
         android:textSize="18sp"
+        android:layout_marginBottom="16dp"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="ポイント履歴"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp">
+        <TextView
+            android:id="@+id/txtLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnUseReward"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp" />
+        android:text="景品交換（100pt）"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="リセット"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnBack"
+        android:onClick="buttonOnClick"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:onClick="buttonOnClick" />
+        android:text="戻る"
+        android:layout_marginTop="16dp" />
+
 </LinearLayout>
