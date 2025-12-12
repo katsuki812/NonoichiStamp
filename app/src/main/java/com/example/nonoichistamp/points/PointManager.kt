@@ -16,7 +16,10 @@ object PointManager {
     private lateinit var prefs: SharedPreferences
     private val logs = mutableListOf<PointLog>()
 
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    // Locale.getDefault() をここで固定しない！
+    private fun getDateFormatter(): SimpleDateFormat {
+        return SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    }
 
     fun init(context: Context) {
         prefs = context.getSharedPreferences("PointData", Context.MODE_PRIVATE)
@@ -73,7 +76,7 @@ object PointManager {
     }
 
     private fun addLog(reason: String, point: Int) {
-        val date = dateFormat.format(Date())
+        val date = getDateFormatter().format(Date())
         logs.add(PointLog(date, reason, point))
     }
 
