@@ -1,26 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- NFC機能の利用に必要なパーミッション（許可）を宣言します。 -->
+    <uses-permission android:name="android.permission.NFC" />
+
+    <!-- このアプリはNFCがなくてもインストールできるように、NFCは必須ではないことを宣言します。 -->
+    <uses-feature
+        android:name="android.nfc"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
-        android:label="NonoichiStamp"
         android:icon="@mipmap/ic_launcher"
+        android:label="NonoichiStamp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        <!-- メイン画面（MainActivity）の定義 -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop"> <!-- singleTop: アプリが起動中にNFCをスキャンしても新しい画面を作らず、既存の画面を再利用するための重要な設定 -->
+
+            <!-- 1. ランチャー（ホーム画面のアイコン）からアプリを起動できるようにするための設定 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- 2. NFCタグが検知されたときに、このアプリが候補として表示されるための設定 -->
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+
+            <!-- 3. 上記のTECH_DISCOVEREDで、具体的にどのNFC技術に応答するかを定義したファイルを指定します。 -->
+            <!-- このmeta-dataは、必ず対応するactivityタグの "内側" に配置する必要があります。 -->
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_list" />
         </activity>
 
+        <!-- ポイント確認画面（PointActivity）の定義 -->
         <activity
             android:name=".points.PointActivity"
             android:exported="true" />
     </application>
-
 
 </manifest>

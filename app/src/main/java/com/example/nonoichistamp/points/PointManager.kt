@@ -1,4 +1,7 @@
-package com.example.nonoichistamp.points
+// PointManager.kt
+
+// パッケージ名を修正
+package com.example.nonoichistamp
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,6 +9,9 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+
+// PointManager.kt の中身はご提示いただいたままでOKです。
+// ただし、パッケージ宣言だけは上記のように com.example.nonoichistamp になっているか確認してください。
 
 data class PointLog(val date: String, val reason: String, val points: Int)
 
@@ -16,7 +22,6 @@ object PointManager {
     private lateinit var prefs: SharedPreferences
     private val logs = mutableListOf<PointLog>()
 
-    // Locale.getDefault() をここで固定しない！
     private fun getDateFormatter(): SimpleDateFormat {
         return SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     }
@@ -27,7 +32,6 @@ object PointManager {
         stamps = prefs.getInt("stamps", 0)
         points = prefs.getInt("points", 0)
 
-        // 履歴読み込み
         logs.clear()
         val logsJson = prefs.getString("logs", "[]") ?: "[]"
         val jsonArray = JSONArray(logsJson)
@@ -45,7 +49,7 @@ object PointManager {
 
     fun addSteps(value: Int) {
         steps += value
-        val earned = value / 100
+        val earned = value / 100 // 1万歩で100ポイントと仮定
         points += earned
         addLog("歩数追加", earned)
         save()
@@ -53,7 +57,7 @@ object PointManager {
 
     fun addStamp() {
         stamps += 1
-        val earned = 10
+        val earned = 10 // スタンプ1回で10ポイントと仮定
         points += earned
         addLog("スタンプ取得", earned)
         save()
