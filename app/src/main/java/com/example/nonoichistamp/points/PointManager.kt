@@ -63,6 +63,13 @@ object PointManager {
         save()
     }
 
+    fun addNfcReadPoint() {
+        val earned = 5 // NFC読み取りで5ポイント加算
+        points += earned
+        addLog("NFC読み取り", earned)
+        save()
+    }
+
     fun usePoints(value: Int) {
         if (points >= value) {
             points -= value

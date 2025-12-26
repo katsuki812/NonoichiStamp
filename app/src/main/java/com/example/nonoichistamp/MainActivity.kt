@@ -94,14 +94,33 @@ class MainActivity : AppCompatActivity() {
             // タグのIDをバイト配列として取得します。
             val id: ByteArray? = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID)
             // バイト配列を人間が読める16進数の文字列に変換します。
-            val nfcId = id?.joinToString(separator = "") { "%02X".format(it) } ?: "取得失敗"
+            // " "（スペース）を区切り文字として追加します。
+            val nfcId = id?.joinToString(separator = " ") { "%02X".format(it) } ?: "取得失敗"
+
+            // ▼▼▼【ここを全面的に修正しました】▼▼▼
+            // 読み取ったNFC IDに応じて、表示するメッセージと処理を分岐します。
+            val locationMessage = when (nfcId) {
+                "04 29 55 49 BE 2A 81" -> "地点Aが検出されました"
+                "04 2A 55 49 BE 2A 81" -> "地点Bが検出されました"
+                "04 33 55 49 BE 2A 81" -> "地点Cが検出されました"
+                "04 32 55 49 BE 2A 81" -> "地点Dが検出されました"
+                else -> "未登録のタグが検出されました"
+            }
 
             // 変換したIDを画面のTextViewに表示します。
-            nfcIdTextView.text = "NFC ID: $nfcId"
+            nfcIdTextView.text = locationMessage
 
-            // ログと短いメッセージで、読み取りが成功したことをユーザーに知らせます。
-            Log.d("NFC_READER", "NFC ID: $nfcId")
-            Toast.makeText(this, "NFCタグを読み取りました", Toast.LENGTH_SHORT).show()
+            // 特定の地点のタグだった場合のみ、ポイントを加算します。
+            if (locationMessage != "未登録のタグが検出されました") {
+                PointManager.addNfcReadPoint()
+                Toast.makeText(this, "$locationMessage\n5ポイント追加しました！", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, locationMessage, Toast.LENGTH_SHORT).show()
+            }
+
+            // ログには常に物理IDを記録しておくと、デバッグに役立ちます。
+            Log.d("NFC_READER", "NFC ID: $nfcId, Message: $locationMessage")
+            // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
         }
     }
 
